@@ -177,7 +177,8 @@ function gameRoles(message){
           if(method == assignRole){
           message.channel.send(cfg.noRole);
           }else{
-            (message.channel.send("That role doesn't exist!"));
+           message.channel.send("That role doesn't exist!").then(sentMessage => {
+             sentMessage.delete(5000);});
           }
       }
     }
