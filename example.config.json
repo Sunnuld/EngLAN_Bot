@@ -1,0 +1,17 @@
+{
+  "token": "your bot application token - KEEP IT SECRET, KEEP IT SAFE",
+  "serverId": "your discord server id",
+
+  "channels": "announcment channel ids, seperated with comma. e.g. '##################,##################,####################'",
+  "channelNames": "announcment channel names, seperated with comma. e.g. 'general,announcments,blah,blah2'",
+
+  "sayPrefix": "say.",
+  "imgPrefix": "image.",
+
+  "rolePrefix": "!role",
+  "noRole": "Sorry! Role not recognised, '!role list' for a list of all avialable Gamer-Roles. Got a game you want adding? Message the admin!👌",
+
+  "helpPrefix": "Your help prefix here. e.g. '!help'",
+
+  "badmins": "admin user ids, seperated with a comma. e.g. '##################,##################'"
+}
