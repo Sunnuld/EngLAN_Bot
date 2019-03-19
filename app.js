@@ -136,7 +136,8 @@ function newMember(member){
 }
 
 function memberLeave(member){
-  message.channel.send(`${member}`+' BEGONE THOT!');
+  var channel = member.guild.channels.find(x => x.name === 'general');
+  channel.send(`${member}`+' BEGONE THOT!');
 }
 
 function gameRoles(message){
