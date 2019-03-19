@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const cfg = require('./config.json');
 const imgblue = new Discord.Attachment('./images/blue.png', 'blue.png');
-const imgred = new Discord.Attachment('./images/banner.png', 'red.png');
+const imgred = new Discord.Attachment('./images/red.png', 'red.png');
+const imgbanner = new Discord.Attachment('./images/banner.png', 'banner.png');
 const adminUsers = cfg.badmins.split(",");
 const announceChannels = cfg.channels.split(",");
 const channelNames = cfg.channelNames.split(",");
@@ -120,9 +121,8 @@ function newMember(member){
     .setThumbnail(memberAvatar)
     .addField('Hey', `${member}` +'!', true)
     .addField('Welcome to EngLAN, your new home of all things gaming! We hope you enjoy your stay!', '🕹🎮')
-    .addBlankField(true)
-    .attachFile(imgred)
-    .setImage('attachment://red.png')
+    .attachFile(imgbanner)
+    .setImage('attachment://banner.png')
     .addField('Head over to our page for info on our next event:', 'https://www.EngLAN.co.uk')
     .setFooter('EngLAN')
     .setTimestamp();
