@@ -175,7 +175,8 @@ function gameRoles(message){
           break;
         default:
           if(method == assignRole){
-          message.channel.send(cfg.noRole);
+          message.channel.send(cfg.noRole).then(sentMessage => {
+            sentMessage.delete(10000);});
           }else{
            message.channel.send("That role doesn't exist!").then(sentMessage => {
              sentMessage.delete(5000);});
