@@ -15,6 +15,7 @@ bot.login(cfg.token);
 
 bot.on('ready', () => {
   server = bot.guilds.get(cfg.serverId); //Server id
+  bot.setActivity('Space Invaders');
   console.log("I'm ready!");
 });
 
