@@ -22,6 +22,10 @@ bot.on('guildMemberAdd', member => {
   newMember(member);
 });
 
+bot.on('guildMemberRemove', member => {
+  memberLeave(member);
+});
+
 bot.on('message', message=>{
   if(message.content.toLowerCase().startsWith(cfg.helpPrefix)){
     help(message);
@@ -106,29 +110,32 @@ function announcements(message){
 }
 
 function newMember(member){
-  if(!member.user.bot){
   var channel = member.guild.channels.find(x => x.name === 'general');
-  var memberAvatar = member.user.avatarURL;
-  if(!channel)return;
-  var embed = new Discord.RichEmbed()
-  .setColor('#0026E6')
-  .setThumbnail(memberAvatar)
-  .addField('Hey', `${member}` +'!', true)
-  .addField('Welcome to EngLAN, your new home of all things gaming! We hope you enjoy your stay!', '🕹🎮')
-  .addBlankField(true)
-  .attachFile(imgred)
-  .setImage('attachment://red.png')
-  .addField('Head over to our page for info on our next event:', 'https://www.EngLAN.co.uk')
-  .setFooter('EngLAN')
-  .setTimestamp();
+  if(!member.user.bot){
+    var memberAvatar = member.user.avatarURL;
+    if(!channel)return;
+    var embed = new Discord.RichEmbed()
+    .setColor('#0026E6')
+    .setThumbnail(memberAvatar)
+    .addField('Hey', `${member}` +'!', true)
+    .addField('Welcome to EngLAN, your new home of all things gaming! We hope you enjoy your stay!', '🕹🎮')
+    .addBlankField(true)
+    .attachFile(imgred)
+    .setImage('attachment://red.png')
+    .addField('Head over to our page for info on our next event:', 'https://www.EngLAN.co.uk')
+    .setFooter('EngLAN')
+    .setTimestamp();
 
-  channel.send(embed);
+    channel.send(embed);
 
-  var arg = member.guild.roles.find(x => x.name === 'The EngLAN Fam');
-  member.addRole(arg.id);
+    var arg = member.guild.roles.find(x => x.name === 'The EngLAN Fam');
+    member.addRole(arg.id);
 
-  }else{DChannel.send('Yay, more bots!');}
+  }else{channel.send('Yay, more bots!');}
+}
 
+function memberLeave(member){
+  message.channel.send(`${member}`+' BEGONE THOT!');
 }
 
 function gameRoles(message){
