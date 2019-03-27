@@ -289,7 +289,7 @@ function newTicket(message){
     if(message == true){
       message.channel.send(embed);
     }else{
-      var channel = server.channels.get(announceChannels[5]);
+      var channel = server.channels.get(announceChannels[0]);
       channel.send(embed);
     }
   }
