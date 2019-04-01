@@ -266,7 +266,7 @@ function checkTickets(){
   webScraper();
   newList = participantArray.length;
   if(newList>oldList){
-    length = oldList - newList;
+    length = newList - oldList;
     newTicket();
   }
   oldList = newList;
