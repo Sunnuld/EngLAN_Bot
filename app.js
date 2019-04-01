@@ -46,7 +46,7 @@ bot.on('message', message => {
     if (message.author.bot) return;
     userid = message.author.id;
       if (adminUsers.includes(userid)) {
-        announcments(message);
+        announcements(message);
     }
   }
 
