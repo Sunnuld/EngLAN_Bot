@@ -286,7 +286,7 @@ function newTicket(message){
       .setFooter('EngLAN')
       .setTimestamp();
 
-    if(message == true){
+    if(message){
       message.channel.send(embed);
     }else{
       var channel = server.channels.get(announceChannels[0]);
