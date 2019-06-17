@@ -140,6 +140,9 @@ function announcements(message) {
         case 'bot-config':
           switchOut = announceChannels[5];
           break;
+          case 'englan_1':
+            switchOut = announceChannels[6];
+          break;
         default:
           message.reply('channel not recognised');
           return;
