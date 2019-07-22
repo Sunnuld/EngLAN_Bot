@@ -75,7 +75,7 @@ setInterval(checkTickets,300000);
 
 function webScraper(){
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-  request('https://www.englan.co.uk/api/events/englan-1-1/participants', (error, response, html) => {
+  request('https://www.englan.co.uk/api/events/englan-2/participants', (error, response, html) => {
 
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(html, {decodeEntities: false});
@@ -141,7 +141,7 @@ function announcements(message) {
           switchOut = announceChannels[5];
           break;
           case 'englan_1':
-            switchOut = announceChannels[6];
+          switchOut = announceChannels[6];
           break;
         default:
           message.reply('channel not recognised');
@@ -283,7 +283,7 @@ function newTicket(message){
     var embed = new Discord.RichEmbed()
 
       .setColor('#0026E6')
-      .addField('EngLAN_#1 Ticket Sold!', 'Welcome:')
+      .addField('EngLAN_#2 Ticket Sold!', 'Welcome:')
       .addField(user, 'Seated: '+seat)
       .addField('Join them!', 'https://www.EngLAN.co.uk')
       .setFooter('EngLAN')
