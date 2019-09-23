@@ -153,7 +153,7 @@ function announcements(message) {
       var sayText = args.join(" ");
       if (image == true) {
         targetChannel.send(sayText, {
-          files: ['./images/send.png']
+          files: ['./images/image.png']
         });
       } else {
         targetChannel.send(sayText);
