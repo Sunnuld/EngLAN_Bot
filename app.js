@@ -128,20 +128,14 @@ function announcements(message) {
         case 'announcements':
           switchOut = announceChannels[1];
           break;
-        case 'now-streaming':
+        case 'find-players':
           switchOut = announceChannels[2];
           break;
-        case 'crabs-salty-place':
+        case 'bot-config':
           switchOut = announceChannels[3];
           break;
-        case 'find-players':
+          case 'englan_2':
           switchOut = announceChannels[4];
-          break;
-        case 'bot-config':
-          switchOut = announceChannels[5];
-          break;
-          case 'englan_1':
-          switchOut = announceChannels[6];
           break;
         default:
           message.reply('channel not recognised');
