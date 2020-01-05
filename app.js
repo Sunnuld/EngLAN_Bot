@@ -1,15 +1,20 @@
 /*jshint esversion: 6 */
+/*##############Init##############*/
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const cfg = require('./config.json');
+bot.login(cfg.token);
+/*##############Depends##############*/
 const request = require('request');
 const cheerio = require('cheerio');
-const imgblue = new Discord.Attachment('./images/blue.png', 'blue.png');
-const imgred = new Discord.Attachment('./images/red.png', 'red.png');
+/*##############Images##############*/
+const imgred = new Discord.Attachment('./images/Logo.png', 'Logo.png');
 const imgbanner = new Discord.Attachment('./images/banner.png', 'banner.png');
+/*##############CFG DATA##############*/
 const adminUsers = cfg.badmins.split(",");
 const announceChannels = cfg.channels.split(",");
 const channelNames = cfg.channelNames.split(",");
+/*##############Vars##############*/
 var participantArray = 0;
 var length;
 var server;
@@ -17,7 +22,8 @@ var newList;
 var oldList;
 var image = false;
 var userid;
-bot.login(cfg.token);
+var event_string = 'tlp-3';
+var intervalVar
 
 /*##############Triggers##############*/
 
@@ -45,8 +51,28 @@ bot.on('message', message => {
   if (message.channel.type.toLowerCase() == 'dm') {
     if (message.author.bot) return;
     userid = message.author.id;
-      if (adminUsers.includes(userid)) {
+    if (adminUsers.includes(userid)) {
         announcements(message);
+    }
+  }
+
+  if (message.content.toLowerCase().startsWith('.watch')) {
+    if (message.author.bot) return;
+    userid = message.author.id;
+    if (adminUsers.includes(userid)) {
+        watchTickets(message);
+    } else {
+      message.channel.send('U No A Badmin!');
+    }
+  }
+
+  if (message.content.toLowerCase().startsWith('.stop')) {
+    if (message.author.bot) return;
+    userid = message.author.id;
+    if (adminUsers.includes(userid)) {
+        stopTickets(message);
+    } else {
+      message.channel.send('U No A Badmin!');
     }
   }
 
@@ -69,13 +95,11 @@ bot.on('message', message => {
   }
 });
 
-setInterval(checkTickets,300000);
-
 /*##############Scraper################*/
 
 function webScraper(){
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-  request('https://www.englan.co.uk/api/events/englan-2/participants', (error, response, html) => {
+  request('https://thelanproject.co.uk/api/events/'${event_string}'/participants', (error, response, html) => {
 
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(html, {decodeEntities: false});
@@ -93,16 +117,16 @@ function help(message) {
     var messageAvatar = message.author.avatarURL;
     var member = message.author;
     var embed = new Discord.RichEmbed()
-      .setColor('#0026E6')
+      .setColor('#D00000')
       .attachFile(imgred)
-      .setThumbnail('attachment://red.png')
+      .setThumbnail('attachment://Logo.png')
       .addField('Hey', `${member}` + "! Here's some of the things I can do for you:", true)
-      .addField('!englan', 'Brings up this help screen, but obviously you knew that!')
+      .addField('!tlp', 'Brings up this help screen, but obviously you knew that!')
       .addField('!role', "Assign yourself game roles, to be used in the '#find-players' channel. Tag on 'remove' if you no longer want that role")
       .addField('E.g.', "'!role Overwatch' & '!role remove Overwatch'")
       .addBlankField(true)
       .addField('Admin Commands:', "DM me 'say. <targetchannel> <message>'\r\n Type '!t #' in any channel to recall the previous # amount of ticket sales")
-      .setFooter('EngLAN')
+      .setFooter('TheLanProject')
       .setTimestamp();
 
     message.channel.send(embed);
@@ -133,9 +157,6 @@ function announcements(message) {
           break;
         case 'bot-config':
           switchOut = announceChannels[3];
-          break;
-          case 'englan_2':
-          switchOut = announceChannels[4];
           break;
         default:
           message.reply('channel not recognised');
@@ -169,19 +190,19 @@ function newMember(member) {
     var memberAvatar = member.user.avatarURL;
     if (!channel) return;
     var embed = new Discord.RichEmbed()
-      .setColor('#0026E6')
+      .setColor('#D00000')
       .setThumbnail(memberAvatar)
       .addField('Hey', `${member}` + '!', true)
-      .addField('Welcome to EngLAN, your new home of all things gaming! We hope you enjoy your stay!', '🕹🎮')
+      .addField('Welcome to TheLanProject, your new home of all things gaming! We hope you enjoy your stay!', '🕹🎮')
       .attachFile(imgbanner)
       .setImage('attachment://banner.png')
-      .addField('Head over to our page for info on our next event:', 'https://www.EngLAN.co.uk')
-      .setFooter('EngLAN')
+      .addField('Head over to our page for info on our next event:', 'https://TheLanProject.co.uk')
+      .setFooter('TheLanProject')
       .setTimestamp();
 
     channel.send(embed);
 
-    var arg = member.guild.roles.find(x => x.name === 'The EngLAN Fam');
+    var arg = member.guild.roles.find(x => x.name === 'TLP Fam');
     member.addRole(arg.id);
 
   } else {
@@ -259,6 +280,23 @@ function deleteRole(role, message) {
   });
 }
 
+function watchTickets(message){
+  var args = message.content.split(" ").slice(1); //create array, args, split it at every space, delet the first element(prefix)
+  var watchChannel = message.channel;
+  if args[0].startsWitch('tlp'){
+    event_string = arg[0];
+    intervalVar = setInterval(checkTickets,60000);
+    message.channel.send('Now watching '${event_string}' for new ticket sales in channel '${watchChannel});
+  } else {
+    message.channel.send('Event name required! I.e. ".watch tlp-#"');
+  }
+}
+
+function stopTickets(message){
+  clearInterval(intervalVar);
+  message.channel.send('No longer watching tickets in this channel!');
+}
+
 function checkTickets(){
   webScraper();
   newList = participantArray.length;
@@ -276,17 +314,17 @@ function newTicket(message){
     var seat = participantArray[participantArray.length-i].seat;
     var embed = new Discord.RichEmbed()
 
-      .setColor('#0026E6')
-      .addField('EngLAN_#2 Ticket Sold!', 'Welcome:')
+      .setColor('#D00000')
+      .addField(''${event_string}' Ticket Sold!', 'Welcome:')
       .addField(user, 'Seated: '+seat)
-      .addField('Join them!', 'https://www.EngLAN.co.uk')
-      .setFooter('EngLAN')
+      .addField('Join them!', 'https://TheLanProject.co.uk')
+      .setFooter('TheLanProject')
       .setTimestamp();
 
     if(message){
       message.channel.send(embed);
     }else{
-      var channel = server.channels.get(announceChannels[0]);
+      var channel = watchChannel;
       channel.send(embed);
     }
   }
