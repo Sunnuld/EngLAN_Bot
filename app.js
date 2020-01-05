@@ -24,6 +24,7 @@ var image = false;
 var userid;
 var event_string = 'tlp-3';
 var intervalVar
+var watchChannel
 
 /*##############Triggers##############*/
 
@@ -282,7 +283,7 @@ function deleteRole(role, message) {
 
 function watchTickets(message){
   var args = message.content.split(" ").slice(1); //create array, args, split it at every space, delet the first element(prefix)
-  var watchChannel = message.channel;
+  watchChannel = message.channel;
   if (args[0].startsWith('tlp')){
     event_string = args[0];
     intervalVar = setInterval(checkTickets,60000);
