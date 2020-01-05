@@ -98,7 +98,7 @@ bot.on('message', message => {
 /*##############Scraper################*/
 
 function webScraper(){
-  var url = 'https://thelanproject.co.uk/api/events/'${event_string}'/participants'
+  var url = 'https://thelanproject.co.uk/api/events/'`${event_string}`'/participants'
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
   request(url, (error, response, html)) => {
     if (!error && response.statusCode == 200) {
@@ -286,7 +286,7 @@ function watchTickets(message){
   if args[0].startsWitch('tlp'){
     event_string = arg[0];
     intervalVar = setInterval(checkTickets,60000);
-    message.channel.send('Now watching '${event_string}' for new ticket sales in channel '${watchChannel});
+    message.channel.send('Now watching '`${event_string}`' for new ticket sales in channel '${watchChannel});
   } else {
     message.channel.send('Event name required! I.e. ".watch tlp-#"');
   }
