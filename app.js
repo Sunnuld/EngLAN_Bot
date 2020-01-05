@@ -310,7 +310,7 @@ function checkTickets(){
 
 function newTicket(message){
   for(i=length; i>0; i--){
-    var user = participantArray[participantArray.length-i].user.steamname;
+    var user = participantArray[participantArray.length-i].username;
     var seat = participantArray[participantArray.length-i].seat;
     var embed = new Discord.RichEmbed()
 
