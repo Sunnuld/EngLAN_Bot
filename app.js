@@ -315,7 +315,7 @@ function newTicket(message){
     var embed = new Discord.RichEmbed()
 
       .setColor('#D00000')
-      .addField(''${event_string}' Ticket Sold!', 'Welcome:')
+      .addField(`${event_string}`+' Ticket Sold!', 'Welcome:')
       .addField(user, 'Seated: '+seat)
       .addField('Join them!', 'https://TheLanProject.co.uk')
       .setFooter('TheLanProject')
