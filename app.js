@@ -283,7 +283,7 @@ function deleteRole(role, message) {
 function watchTickets(message){
   var args = message.content.split(" ").slice(1); //create array, args, split it at every space, delet the first element(prefix)
   var watchChannel = message.channel;
-  if (args[0].startsWitch('tlp')){
+  if (args[0].startsWith('tlp')){
     event_string = arg[0];
     intervalVar = setInterval(checkTickets,60000);
     message.channel.send('Now watching '+`${event_string}`+' for new ticket sales in channel '+`${watchChannel}`);
