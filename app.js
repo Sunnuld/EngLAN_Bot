@@ -99,7 +99,7 @@ bot.on('message', message => {
 
 function webScraper(){
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
-  request('https://thelanproject.co.uk/api/events/'${event_string}'/participants', (error, response, html) => {
+  request('https://thelanproject.co.uk/api/events/'${event_string}'/participants', (error, response, html)) => {
 
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(html, {decodeEntities: false});
