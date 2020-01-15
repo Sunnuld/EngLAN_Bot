@@ -286,7 +286,7 @@ function watchTickets(message){
   watchChannel = message.channel;
   if (args[0].startsWith('tlp')){
     event_string = args[0];
-    intervalVar = setInterval(checkTickets,60000);
+    intervalVar = setInterval(checkTickets,180000);
     message.channel.send('Now watching '+`${event_string}`+' for new ticket sales in channel '+`${watchChannel}`);
   } else {
     message.channel.send('Event name required! I.e. ".watch tlp-#"');
