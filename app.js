@@ -25,12 +25,13 @@ var userid;
 var event_string = 'tlp-3';
 var intervalVar
 var watchChannel
+var argArray = [];
 
 /*##############Triggers##############*/
 
 bot.on('ready', () => {
   server = bot.guilds.get(cfg.serverId); //Server id
-  bot.user.setActivity('Space Invaders');
+  bot.user.setActivity('Street Fighter');
   console.log("I'm ready!");
 
   checkTickets();
@@ -54,6 +55,8 @@ bot.on('message', message => {
     userid = message.author.id;
     if (adminUsers.includes(userid)) {
         announcements(message);
+    }else if (argArray.includes(userid)) {
+        gameFunctions(message);
     }
   }
 
@@ -93,6 +96,16 @@ bot.on('message', message => {
         newTicket(message);
         message.delete();
     }
+  }
+
+  if (message.content.toLowerCase().startsWith('tlp-arg')) {
+    message.delete();
+    if (message.author.bot) return;
+    userid = message.author.id;
+    argArray.push(userid);
+    var arg = message.guild.roles.find(x => x.name === "TLP-ARG");
+    message.member.addRole(arg.id);
+    message.author.send("Congratualtions on solving the TLP#3 Augmented Reality Game... Clue#1! You'll notice you have access to a new channel within the event section of teh discord, find a new clue there! If you think you have found a solution but are not sure what to do with it, send it to me here for a hint!");
   }
 });
 
@@ -328,5 +341,12 @@ function newTicket(message){
       var channel = watchChannel;
       channel.send(embed);
     }
+  }
+}
+
+function gameFunctions(message){
+  var msg = message.content.split(" ");
+  switch(msg[0]){
+    case
   }
 }
