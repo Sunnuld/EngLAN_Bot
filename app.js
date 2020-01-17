@@ -346,7 +346,4 @@ function newTicket(message){
 
 function gameFunctions(message){
   var msg = message.content.split(" ");
-  switch(msg[0]){
-    case
-  }
 }
