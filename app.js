@@ -111,7 +111,7 @@ bot.on('message', message => {
     var arg = message.guild.roles.find(x => x.name === "TLP-ARG");
     message.member.addRole(arg.id);
     message.author.send("Congratualtions on solving the TLP#3 Augmented Reality Game... Clue#1! You'll notice you have access to a new channel within the event section of the discord, find a new clue there! If you think you have found a solution but are not sure what to do with it, send it to me here for a hint!");
-    client.channels.get(argChannel).send("Welcome to the game <@"+`${userid}`+">! Find the next clue attached to the pinned message, and feel free to use this chat to work together!");
+    bot.channels.get(argChannel).send("Welcome to the game <@"+`${userid}`+">! Find the next clue attached to the pinned message, and feel free to use this chat to work together!");
   }
 });
 
