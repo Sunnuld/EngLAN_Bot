@@ -102,10 +102,14 @@ bot.on('message', message => {
     message.delete();
     if (message.author.bot) return;
     userid = message.author.id;
+    if (argArray.includes(userid)){
+      message.author.send("You've already comepleted this step! Try Harder!")
+      return;
+    }
     argArray.push(userid);
     var arg = message.guild.roles.find(x => x.name === "TLP-ARG");
     message.member.addRole(arg.id);
-    message.author.send("Congratualtions on solving the TLP#3 Augmented Reality Game... Clue#1! You'll notice you have access to a new channel within the event section of teh discord, find a new clue there! If you think you have found a solution but are not sure what to do with it, send it to me here for a hint!");
+    message.author.send("Congratualtions on solving the TLP#3 Augmented Reality Game... Clue#1! You'll notice you have access to a new channel within the event section of the discord, find a new clue there! If you think you have found a solution but are not sure what to do with it, send it to me here for a hint!");
   }
 });
 
