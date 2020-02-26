@@ -42,8 +42,8 @@ bot.on('guildMemberAdd', member => {
   newMember(member);
 });
 
-bot.on('guildMemberRemove', GuildMember => {
-  memberLeave(GuildMember);
+bot.on('guildMemberRemove', guildMember => {
+  memberLeave(guildMember);
 });
 
 bot.on('message', message => {
@@ -230,9 +230,9 @@ function newMember(member) {
   }
 }
 
-function memberLeave(GuildMember) {
-  var channel = GuildMember.guild.channels.find(x => x.name === 'bot-config');
-  var username = GuildMember.nickname
+function memberLeave(guildMember) {
+  var channel = guildMember.guild.channels.find(x => x.name === 'bot-config');
+  var username = guildMember.nickname
   channel.send(`${username}` + ' BEGONE THOT!');
 }
 
