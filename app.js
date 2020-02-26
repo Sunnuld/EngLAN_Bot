@@ -231,7 +231,7 @@ function newMember(member) {
 }
 
 function memberLeave(GuildMember) {
-  var channel = member.guild.channels.find(x => x.name === 'bot-config');
+  var channel = GuildMember.guild.channels.find(x => x.name === 'bot-config');
   var username = GuildMember.nickname
   channel.send(`${username}` + ' BEGONE THOT!');
 }
