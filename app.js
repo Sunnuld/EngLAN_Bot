@@ -39,7 +39,7 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member => {
-  newMember(member);
+  //newMember(member);
 });
 
 bot.on('guildMemberRemove', member => {
