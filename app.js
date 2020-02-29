@@ -269,6 +269,10 @@ function gameRoles(message) {
       case 'apex':
         method('Apex Legends', message);
         break;
+      case 'tarkov':
+      case 'escape':
+        method('Escape From Tarkov', message);
+        break;
       default:
         if (method == assignRole) {
           message.channel.send(cfg.noRole).then(sentMessage => {
